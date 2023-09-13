@@ -1,4 +1,4 @@
-# Sockets
+# Networking in C++
 
 #### Different types of connections:
 
