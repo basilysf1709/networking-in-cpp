@@ -5,7 +5,10 @@
 #include <sys/socket.h>
 
 int main() {
+    /* This line creates a socket. AF_INET specifies that this is an IPv4 socket, 
+        and SOCK_STREAM indicates that this socket will be used for TCP/IP communication. */
     int serverSocket = socket(AF_INET, SOCK_STREAM, 0);
+    
     if (serverSocket == -1) {
         std::cerr << "Error creating socket" << std::endl;
         return -1;
