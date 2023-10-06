@@ -1,29 +1,28 @@
 #include <iostream>
+
 #include <boost/asio.hpp>
+#include <boost/asio/ts/buffer.hpp>
+#include <boost/asio/ts/internet.hpp>
+#include <boost/system/error_code.hpp>
 
 using namespace boost::asio;
+using namespace std;
 
-
-// set it up on wsl
 int main() {
-    io_service io;
-    ip::tcp::acceptor acceptor(io, ip::tcp::endpoint(ip::tcp::v4(), 12345));
+    boost::system::error_code ec;
+    io_context context;
+    ip::tcp::endpoint endpoint(ip::make_address("127.0.0.1", ec), 80);
+    ip::tcp::socket socket(context);
+    socket.connect(endpoint, ec);
 
-    while (true) {
-        ip::tcp::socket socket(io);
-        acceptor.accept(socket);
-
-        std::string message = "Hello, client!";
-        boost::system::error_code error;
-        write(socket, buffer(message), error);
-
-        if (!error) {
-            char data[1024];
-            size_t length = socket.read_some(buffer(data), error);
-            if (!error)
-                write(socket, buffer(data, length), error);
-        }
+    if (!ec) {
+       cout<< "Connected!!" <<endl;
+    } else {
+       cout << "Failed to connect to address!\nError: " << ec.message() <<endl;
     }
 
+    cin.get();
     return 0;
 }
+
+
