@@ -37,6 +37,7 @@ int main() {
    boost::system::error_code ec;
 
    // Create the context - space where asio can do its work
+   // An io_context is essentially a context in which asynchronous I/O operations will occur.
    asio::io_context context;
 
    // Start the context as its own thread
