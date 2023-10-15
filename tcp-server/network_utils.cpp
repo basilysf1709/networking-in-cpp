@@ -5,10 +5,7 @@
 #include <memory.h>
 #include "network_utils.h"
 
-char *
-network_convert_ip_n_to_p(uint32_t ip_addr,
-                    char *output_buffer){
-
+char* network_convert_ip_n_to_p(uint32_t ip_addr, char* output_buffer){
     char *out = NULL;
     static char str_ip[16];
     out = !output_buffer ? str_ip : output_buffer;
@@ -19,8 +16,7 @@ network_convert_ip_n_to_p(uint32_t ip_addr,
     return out;
 }
 
-uint32_t
-network_covert_ip_p_to_n(const char *ip_addr){
+uint32_t network_covert_ip_p_to_n(const char *ip_addr){
 
     uint32_t binary_prefix = 0;
     inet_pton(AF_INET, ip_addr, &binary_prefix);
